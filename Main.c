@@ -6,17 +6,40 @@
  * Which simply executes the command:
  * nasm -felf64 Assembly.asm && gcc Main.c Assembly.o && ./a.out
  *
- * @author Jacob Schrum, 8/4/2022
+ * @author Jacob Schrum, 8/5/2022
  */
 
 #include <stdio.h>
+#include <inttypes.h>
 
-int sendArray(int[],int);
-int readAssemblyIntArray(int);
+uint64_t fibRecursive(uint64_t);
+
+/**
+ * C code that iteratively computes the n-th Fibonacci number.
+ * 
+ * @param n Fibonacci number to compute.
+ * @return uint64_t Fib(n)
+ */
+uint64_t fibCIterative(uint64_t n) {
+	if(n <= 1) return 1;
+	else {
+		uint64_t twoBack = 1;
+		uint64_t oneBack = 1;
+		uint64_t result;
+		uint64_t i;
+		for(i = 2; i <= n; i++) {
+			result = twoBack + oneBack;
+			twoBack = oneBack;
+			oneBack = result;
+		}
+		return result;
+	}
+}
 
 int main() {
-	int arr1[] = {5,3,75,23,12,-22,-331,32324,-122};
-	int index = 3;
-	int result = sendArray(arr1,index);
-	printf("arr[%d] = %d which is %X in hex\n",index,result,result);	
+	uint64_t i;
+	// Print first 10 Fibonacci numbers
+	for(i = 0; i < 10; i++) {
+		printf("fibRecursive(%lu) = %lu\n",i,fibRecursive(i));	
+	}
 }

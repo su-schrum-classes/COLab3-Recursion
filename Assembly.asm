@@ -4,24 +4,25 @@
 ; @author Jacob Schrum, 8/5/2022
 ; -----------------------------------------------------------------------------
 
-	global sendArray
-	global readAssemblyIntArray
+	global fibRecursive
 
 	section .text
-; The int[] pointer parameter will be in register rdi, 
-; the int parameter is in esi, and the return value comes from eax
-sendArray:
-	mov eax, [rdi + 4*rsi]
-	ret 				; Implicitly returns eax
-
-; The int parameter is in register edi
-readAssemblyIntArray:
-	mov eax, [intArray + 4*edi]
+; In parameter in register rdi, 
+; Result returned in rax
+fibRecursive:
+	cmp rdi, 1			; if(rdi > 1) then it is neither 0 nor 1,
+	ja recursiveCase	; therefore, we are in a recursive case.
+						; Note: ja used because we have an unsigned number.
+	mov rax, 1			; base cases for rdi = 0 or 1 both return 1.
 	ret
-
-; This section is a data segment that stores static global array variables
-	section .data
-
-intArray	dd 	89, 10, 67, -1, 4, 27, -12, 34, 86, 3
-quadArray	dq 	5FE368E99h, 0E9325492Ch, 3430020, 45FFFA3h, 123453E5678h, -234, 9ABCDEFh, 92Ah, 77h, 93Ch, 0FFFFFFFFFFFFFFFAh, 0Dh, 90203000h 
-charArray 	db 	"Each character is a byte in memory, and these are stored in adjacent locations"
+recursiveCase:
+	push rdi			; Save parameter rdi before recursive
+	dec rdi				; First recursive call is fibRecursive(rdi - 1)
+	call fibRecursive	; Now rax = fibRecursive(rdi - 1)
+	pop rdi				; Restore original value of rdi
+	push rax			; Save rax before second recursive call
+	sub rdi, 2			; Second recursive call is for fibRecursive(rdi - 2)
+	call fibRecursive	; Now rax = fibRecursive(rdi - 2)
+	pop rbx				; Pop old rax onto rbx: rbx = fibRecursive(rdi - 1)
+	add rax, rbx		; Now rax = fibRecursive(rdi - 2) + fibRecursive(rdi - 1)
+	ret 
