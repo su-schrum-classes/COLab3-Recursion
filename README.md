@@ -10,7 +10,7 @@ sudo apt-get -y install nasm
 
 # Lab 3: Recursion
 
-After installing NASM, execute the code by running the command `bash run.sh`. It will compute the first 10 Fibonacci numbers:
+After installing NASM, execute the code by running the command `bash run.bash`. It will compute the first 10 Fibonacci numbers:
 ```
 fibRecursive(0) = 1
 fibRecursive(1) = 1
