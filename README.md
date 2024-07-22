@@ -29,4 +29,4 @@ Getting back to the recursive `fibRecursive` procedure, let's analyze how it wor
 
 Given the above explanation, attempt writing a `sumRecursive` procedure that computes the sum of all integers from 1 up to and including some integer parameter.
 
-If you can successfully compute the recursive sum, then take a shot at `factorialRecursive`, which will require you to figure out the assembly multiplication instruction.
+If you can successfully compute the recursive sum, then take a shot at `factorialRecursive`, which will require you to use the assembly multiplication instruction. There is an example of how to use `MUL` for 32-bit unsigned integers under the label `mulExample`.

@@ -1,10 +1,11 @@
 ; -----------------------------------------------------------------------------
 ; Some assembly procedures that get called from the C program.
 ;
-; @author Jacob Schrum, 8/5/2022
+; @author Jacob Schrum, 7/21/2024
 ; -----------------------------------------------------------------------------
 
 	global fibRecursive
+	global mulExample
 
 	section .text
 ; In parameter in register rdi, 
@@ -26,3 +27,21 @@ recursiveCase:
 	pop rbx				; Pop old rax onto rbx: rbx = fibRecursive(rdi - 1)
 	add rax, rbx		; Now rax = fibRecursive(rdi - 2) + fibRecursive(rdi - 1)
 	ret 
+
+; No parameters. Just an example of how to
+; use the mul instruction for unsigned 
+; (non-negative) 32-bit integers.
+; Result returned in rax
+mulExample:
+
+	mov eax, 20
+	mov ecx, 33
+
+    ; 64 bit result from multiplying two 32 bit ints
+	mul ecx  ; EDX:EAX <- EAX * ECX
+
+	; For these small numbers, the result will fit in
+	; EAX, and EDX will be zero, but EDX would contain
+	; values for larger numbers.
+
+	ret

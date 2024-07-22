@@ -6,13 +6,14 @@
  * Which simply executes the command:
  * nasm -felf64 Assembly.asm && gcc Main.c Assembly.o && ./a.out
  *
- * @author Jacob Schrum, 8/5/2022
+ * @author Jacob Schrum, 7/21/2024
  */
 
 #include <stdio.h>
 #include <inttypes.h>
 
 uint64_t fibRecursive(uint64_t);
+uint32_t mulExample();
 
 /**
  * C code that iteratively computes the n-th Fibonacci number.
@@ -42,4 +43,7 @@ int main() {
 	for(i = 0; i < 10; i++) {
 		printf("fibRecursive(%lu) = %lu\n",i,fibRecursive(i));	
 	}
+
+	// Uncomment to see result of the multiplication code
+	// printf("Multiplication result: %u\n", mulExample());
 }
